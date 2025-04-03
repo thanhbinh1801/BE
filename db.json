@@ -1,0 +1,19 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "cu to nhu cot dien",
+      "age": 20
+    },
+    {
+      "id": 2,
+      "name": "thanh",
+      "age": 20
+    },
+    {
+      "id": 6,
+      "name": "cu to nhu cot dien",
+      "age": 20
+    }
+  ]
+}
