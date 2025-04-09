@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "id": 3,
+      "name": "nhat huy cu be",
+      "age": 6,
+      "gender": "male",
+      "email": "cunhonhuhuy@gmail.com",
+      "phone": "09741656789"
+    },
+    {
+      "id": 4,
+      "name": "one huy cu be",
+      "age": 14,
+      "gender": "female",
+      "email": "cunhonhuhuy@gmail.com",
+      "phone": "09452656789"
+    },
+    {
+      "id": 5,
+      "name": "one huy cu be",
+      "age": 14,
+      "gender": "female",
+      "email": "cunhonhuhuy@gmail.com",
+      "phone": "09452656789"
+    },
+    {
+      "id": 6,
+      "name": "ho dang hung",
+      "age": 12,
+      "gender": "female",
+      "email": "cutobangconngua@gmail.com",
+      "phone": "09123454259"
+    },
+    {
+      "id": 7,
+      "name": "one huy cu to",
+      "age": 14,
+      "gender": "female",
+      "email": "cutonhuhuy@gmail.com",
+      "phone": "09452656789"
+    }
+  ]
+}

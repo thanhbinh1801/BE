@@ -6,6 +6,7 @@ import user_router from './routes/user_router.js';
 const PORT = process.env.PORT; 
 
 const app = express(); 
+
 app.use(express.json());
 
 app.get('/', (req, res) => {
