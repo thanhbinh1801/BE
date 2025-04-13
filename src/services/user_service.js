@@ -1,6 +1,8 @@
 import writeFileSync from "../utils/WriteFileSync.js";
 import dbjson from '../db/db.json' with {type: "json"};
 
+//code theo class
+
 const getAllUser = async () => {
   return dbjson.users;
 }
@@ -43,7 +45,7 @@ const deleteUser = async (id) => {
   }
   const deleteUser = dbjson.users.splice(user_index, 1);
   writeFileSync(dbjson);
-  return deleteUser[0];
+  return deleteUser;
 }
 
 export default  {

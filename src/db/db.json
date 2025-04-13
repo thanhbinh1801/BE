@@ -1,44 +1,44 @@
 {
   "users": [
     {
-      "id": 3,
-      "name": "nhat huy cu be",
-      "age": 6,
-      "gender": "male",
-      "email": "cunhonhuhuy@gmail.com",
-      "phone": "09741656789"
-    },
-    {
-      "id": 4,
-      "name": "one huy cu be",
-      "age": 14,
+      "id": "1",
+      "name": "ho dang hungggg",
+      "age": "12",
       "gender": "female",
-      "email": "cunhonhuhuy@gmail.com",
-      "phone": "09452656789"
-    },
-    {
-      "id": 5,
-      "name": "one huy cu be",
-      "age": 14,
-      "gender": "female",
-      "email": "cunhonhuhuy@gmail.com",
-      "phone": "09452656789"
-    },
-    {
-      "id": 6,
-      "name": "ho dang hung",
-      "age": 12,
-      "gender": "female",
-      "email": "cutobangconngua@gmail.com",
+      "email": "danghung1110@gmail.com",
       "phone": "09123454259"
     },
     {
-      "id": 7,
-      "name": "one huy cu to",
+      "id": "2",
+      "name": "nguyen huu nhat huy",
       "age": 14,
       "gender": "female",
-      "email": "cutonhuhuy@gmail.com",
+      "email": "onehuy2409@gmail.com",
       "phone": "09452656789"
+    },
+    {
+      "id": "3",
+      "name": "chau thanh binh",
+      "age": "16",
+      "gender": "male",
+      "email": "chauthanhbinh@gmail.com",
+      "phone": "09452648969"
+    },
+    {
+      "id": "4",
+      "name": "chau thanh binhhhhh",
+      "age": "12",
+      "gender": "male",
+      "email": "llanaaosain@hotmail.com",
+      "phone": "09123454255"
+    },
+    {
+      "id": "5",
+      "name": "chau thanh tungggg",
+      "age": "19",
+      "gender": "male",
+      "email": "thanhtungnkd@gmail.com",
+      "phone": "09658741252"
     }
   ]
 }

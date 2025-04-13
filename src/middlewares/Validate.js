@@ -3,25 +3,39 @@ const regexPhone = /^09[0-9]{9}/;
 
 const userValidate = ( req, res, next ) => {
   const user = req.body;
+  let check = false;
+  let errorArr = [];
 
   if(user.name.length < 10 || !user.name) {
-    res.send("Name error!");
+    errorArr.push("Name Error");
+    check = true;   
   }
 
-  if( user.age <= 0  || user.age >= 20){
-    res.send("Age error!");
+  if( user.age <= 0  || user.age >= 20 || isNaN(user.age)){
+    errorArr.push("Age is invalid");
+    check = true;
   }
 
   if(user.gender !== "male" && user.gender !== "female"){
-    res.send("Gender error!");
+    errorArr.push("Gender Error");
+    check = true;
   }
 
   if(!regexEmail.test(user.email)){
-    res.send("Email error!");
+    errorArr.push("Email Error");
+    check = true;
   }
 
   if(!regexPhone.test(user.phone)){
-    res.send("Phone error!");
+    errorArr.push("Phone Error");
+    check = true;
+  }
+
+  if(check) {
+    res.status(400).json({message: "Data is invalid",
+      err: errorArr
+    })
+    return;
   }
   
   next();

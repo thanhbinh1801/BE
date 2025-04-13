@@ -1,67 +1,98 @@
-import userService from '../services/user_service.js'
+import userModels from '../models/user_models.js'
 
-const getAllUser = async (req, res) => {
-  const user = await userService.getAllUser();
-  if(!user){
-    return res.status(404).json({message: "User not found!"});
-  }
-  res.status(200).json(user);
-}
+class UserControllers{
 
-const getUserByID = async (req, res) => {
-  const id = req.params.id;
-  const user = await userService.getUserbyID(id);
-  if(!user){
-    return res.status(404).json({message: "User not found!"});
+    static getAllUser = async (req, res) => {
+      try {
+          const users = await userModels.getAllUser();
+          res.render('index', { users });
+      } catch(error) {
+          res.status(500).render('error', { message: "Fail to get users" });
+      }
   }
-  res.status(200).json(user);
-}
 
-const addUser = async (req, res) => {
-  try{
-    const user = req.body;
-    const newUser = userService.addUser(user);
-    console.log(newUser);
-    res.status(201).json(newUser);
+  static showAddForm = (req, res) => {
+      res.render('form', { 
+          title: 'Add New User',
+          actionUrl: '/add',
+          user: null 
+      });
   }
-  catch(error){
-    res.status(500).json({ message: "Internal Server Error" });
-  }
-}
 
-const putUser = async (req, res) => {
-  try{
-    const id = req.params.id;
-    const user = req.body;
-    const updateUser = await userService.putUser(user, id);
-    if(!updateUser) {
-      return res.status(404).json({message: "User not found!"});
+  static showEditForm = async (req, res) => {
+      try {
+          const id = req.params.id;
+          const user = await userModels.getUserbyID(id);
+          if(!user) {
+              return res.status(404).render('error', { message: "User not found!" });
+          }
+          res.render('form', { 
+              title: 'Edit User',
+              actionUrl: `/edit/${id}?_method=PUT`,
+              user 
+          });
+      } catch(error) {
+          res.status(500).render('error', { message: "Fail to get user" });
+      }
+  }
+
+  static getUserByID = async (req, res) => {
+    try{
+      const id = req.params.id;
+      const user = await userModels.getUserbyID(id);
+      if(!user){
+        return res.status(404).json({message: "User not found!"});
+      }
+      res.status(200).json(user);
     }
-    res.status(200).json(updateUser);
-  }
-  catch(error){
-    res.status(500).json({ message : "Internal Server Error"});
-  }
-}
-
-const deleteUser = async (req, res) => {
-  try{
-    const id = req.params.id;
-    const deleteUser = await userService.deleteUser(id);
-    if(!deleteUser){
-      return res.status(404).json({ message :" User not found !"});
+    catch(error){
+      res.status(500).json({message: "Fail to get user by ID"});
     }
-    res.status(200).send("User deleted successfully");
   }
-  catch(error){
-    res.status(500).json({ message : "Internal Server Error"});
+
+  static addUser = async (req, res) => {
+    try{
+      const user = req.body;
+      const newUser = userModels.addUser(user);
+      res.redirect('/');
+    }
+    catch(error){
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  }
+
+  static putUser = async (req, res) => {
+    try{
+      const id = req.params.id;
+      const user = req.body;
+      const updateUser = await userModels.putUser(user, id);
+      console.log(updateUser);
+      if(!updateUser) {
+        return res.status(404).json({message: "User not found!"});
+      }
+      res.redirect('/');
+    }
+    catch(error){
+      res.status(500).json({ message : "Internal Server Error"});
+    }
+  }
+
+  static deleteUser = async (req, res) => {
+    try{
+      const id = req.params.id;
+      console.log("id :", id);
+      const deleteUser = await userModels.deleteUser(id);
+
+      if(!deleteUser){
+        return res.status(404).json({ message :" User not found !"});
+      }
+      res.redirect('/');
+
+    }
+    catch(error){
+      res.status(500).json({ message : "Internal Server Error"});
+    }
   }
 }
 
-export default {
-  getAllUser,
-  getUserByID,
-  addUser,
-  putUser,
-  deleteUser
-}
+export default UserControllers;

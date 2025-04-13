@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Management</title>
+    <link rel="stylesheet" href="/css/style.css">
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>User List</h1>
+        <div>
+          <a href="/add" class="action-link">Add New</a>
+          <a>Edit</a>
+        </div>
+      </div>
+      <div class="content">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (users && users.length > 0) { %> <%
+            users.forEach(function(user) { %>
+            <tr>
+              <td><%= user.id %></td>
+              <td><%= user.name %></td>
+              <td><%= user.age %></td>
+              <td><%= user.gender %></td>
+              <td><%= user.email %></td>
+              <td><%= user.phone %></td>
+              <td>
+                <a href="/edit/<%= user.id %>">Edit</a>
+                <button class="btn-delete" data-id="<%= user.id %>">
+                  Delete
+                </button>
+              </td>
+            </tr>
+            <% }); %> <% } else { %>
+            <tr>
+              <td colspan="7">No users found.</td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+      <form id="delete-form" action="" method="POST" style="display: none">
+        <label>Are you sure?</label>
+        <button type="submit">OK</button>
+        <button type="button" id="ko-btn">KO</button>
+      </form>
+    </div>
+
+    <script>
+      const deleteBtns = document.querySelectorAll(".btn-delete");
+      const deleteForm = document.querySelector("#delete-form");
+
+      deleteBtns.forEach((button) => {
+        button.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          const userId = button.getAttribute("data-id");
+          deleteForm.setAttribute("action", `/delete/${userId}?_method=DELETE`);
+          deleteForm.style.display = "block";
+        });
+      });
+
+      document.getElementById("ko-btn").addEventListener("click", function () {
+        deleteForm.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
