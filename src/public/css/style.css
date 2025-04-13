@@ -36,7 +36,7 @@
   border-radius: 5px;
 }
 
-/* Table styling */
+/* Content styling */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -59,7 +59,6 @@ tbody tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Action buttons styling */
 td a,
 td button {
   padding: 5px 10px;
@@ -72,39 +71,44 @@ td button {
 }
 
 td a[href^="/edit"] {
-  background-color: #28a745; /* Green for Edit button */
+  background-color: #28a745; 
 }
 
 td button.btn-delete {
-  background-color: #dc3545; /* Red for Delete button */
+  background-color: #dc3545; 
 }
 
 /* Delete form styling */
-#delete-form {
-  margin-top: 20px;
-  padding: 10px;
-  background-color: #f8d7da;
-  border: 1px solid #f5c6cb;
-  border-radius: 5px;
+.form-delete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); 
+  background-color: #f8d7da; 
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  width: 300px; 
+  display: none;
 }
 
-#delete-form label {
-  margin-right: 10px;
-}
-
-#delete-form button {
-  padding: 5px 10px;
+button {
+  padding: 10px 20px;
+  margin: 10px;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
 }
 
-#delete-form button[type="submit"] {
-  background-color: #28a745;
+button[type="submit"] {
+  background-color: green;
   color: white;
 }
 
-#delete-form button#ko-btn {
-  background-color: #dc3545;
+button#ko-btn {
+  background-color: red;
   color: white;
+}
+button:hover {
+  opacity: 0.8;
 }

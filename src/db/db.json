@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "1",
-      "name": "ho dang hungggg",
+      "name": "Hồ Đăng Hùng",
       "age": "12",
       "gender": "female",
       "email": "danghung1110@gmail.com",
@@ -10,15 +10,15 @@
     },
     {
       "id": "2",
-      "name": "nguyen huu nhat huy",
-      "age": 14,
+      "name": "Nguyễn Hữu Nhất Huy",
+      "age": "14",
       "gender": "female",
       "email": "onehuy2409@gmail.com",
       "phone": "09452656789"
     },
     {
       "id": "3",
-      "name": "chau thanh binh",
+      "name": "Châu Thanh Bình",
       "age": "16",
       "gender": "male",
       "email": "chauthanhbinh@gmail.com",
@@ -26,19 +26,27 @@
     },
     {
       "id": "4",
-      "name": "chau thanh binhhhhh",
+      "name": "Lưu Hoàng Phúc",
       "age": "12",
       "gender": "male",
-      "email": "llanaaosain@hotmail.com",
+      "email": "luuhoangphuc@hotmail.com",
       "phone": "09123454255"
     },
     {
       "id": "5",
-      "name": "chau thanh tungggg",
+      "name": "Ngô Văn Lộc",
       "age": "19",
       "gender": "male",
-      "email": "thanhtungnkd@gmail.com",
+      "email": "ngovanloc@gmail.com",
       "phone": "09658741252"
+    },
+    {
+      "id": "6",
+      "name": "Huỳnh Như Bảo Nhân",
+      "age": "19",
+      "gender": "male",
+      "email": "baonhan2710@gmail.com",
+      "phone": "09756841254"
     }
   ]
 }

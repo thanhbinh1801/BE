@@ -5,9 +5,9 @@ class UserControllers{
     static getAllUser = async (req, res) => {
       try {
           const users = await userModels.getAllUser();
-          res.render('index', { users });
+          res.status(200).render('index', { users });
       } catch(error) {
-          res.status(500).render('error', { message: "Fail to get users" });
+        res.status(500).json({ message: "Fail to get user" });
       }
   }
 
@@ -24,7 +24,7 @@ class UserControllers{
           const id = req.params.id;
           const user = await userModels.getUserbyID(id);
           if(!user) {
-              return res.status(404).render('error', { message: "User not found!" });
+              return res.status(404).json({ message: "User not found!" });
           }
           res.render('form', { 
               title: 'Edit User',
@@ -32,7 +32,7 @@ class UserControllers{
               user 
           });
       } catch(error) {
-          res.status(500).render('error', { message: "Fail to get user" });
+          res.status(500).json({ message: "Fail to get user" });
       }
   }
 
@@ -54,7 +54,7 @@ class UserControllers{
     try{
       const user = req.body;
       const newUser = userModels.addUser(user);
-      res.redirect('/');
+      res.status(201).redirect('/');
     }
     catch(error){
       res.status(500).json({ message: "Internal Server Error" });
@@ -66,7 +66,6 @@ class UserControllers{
       const id = req.params.id;
       const user = req.body;
       const updateUser = await userModels.putUser(user, id);
-      console.log(updateUser);
       if(!updateUser) {
         return res.status(404).json({message: "User not found!"});
       }
@@ -80,14 +79,12 @@ class UserControllers{
   static deleteUser = async (req, res) => {
     try{
       const id = req.params.id;
-      console.log("id :", id);
       const deleteUser = await userModels.deleteUser(id);
 
       if(!deleteUser){
         return res.status(404).json({ message :" User not found !"});
       }
       res.redirect('/');
-
     }
     catch(error){
       res.status(500).json({ message : "Internal Server Error"});

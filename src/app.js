@@ -3,7 +3,6 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import user_router from './routes/user_router.js';
-import userModels from './models/user_models.js'; 
 import methodOverride from 'method-override';
 
 dotenv.config();
@@ -12,7 +11,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); 
