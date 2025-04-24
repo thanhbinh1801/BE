@@ -1,45 +1,23 @@
-import userModels from '../models/user_models.js'
+import UserService from '../services/user_service.js';
 
 class UserControllers{
-
-    static getAllUser = async (req, res) => {
-      try {
-          const users = await userModels.getAllUser();
-          res.status(200).render('index', { users });
-      } catch(error) {
-        res.status(500).json({ message: "Fail to get user" });
-      }
-  }
-
-  static showAddForm = (req, res) => {
-      res.render('form', { 
-          title: 'Add New User',
-          actionUrl: '/add',
-          user: null 
-      });
-  }
-
-  static showEditForm = async (req, res) => {
-      try {
-          const id = req.params.id;
-          const user = await userModels.getUserbyID(id);
-          if(!user) {
-              return res.status(404).json({ message: "User not found!" });
-          }
-          res.render('form', { 
-              title: 'Edit User',
-              actionUrl: `/edit/${id}?_method=PUT`,
-              user 
-          });
-      } catch(error) {
-          res.status(500).json({ message: "Fail to get user" });
-      }
+  static getAllUser = async (req, res) => {
+    try {
+        const users = await UserService.getAllUser();
+        console.log(users);
+        if(!users){
+          return res.status(404).json({message : "User not found"});
+        }
+        res.status(200).json(users);
+    } catch(error) {
+      res.status(500).json({ message: "Fail to get all user" });
+    }
   }
 
   static getUserByID = async (req, res) => {
     try{
       const id = req.params.id;
-      const user = await userModels.getUserbyID(id);
+      const user = await UserService.getUserById(id);
       if(!user){
         return res.status(404).json({message: "User not found!"});
       }
@@ -53,8 +31,8 @@ class UserControllers{
   static addUser = async (req, res) => {
     try{
       const user = req.body;
-      const newUser = userModels.addUser(user);
-      res.status(201).redirect('/');
+      const newUser = await UserService.addUser(user);
+      res.status(201).json({message : "Add user successfully!", user: newUser});
     }
     catch(error){
       res.status(500).json({ message: "Internal Server Error" });
@@ -65,11 +43,11 @@ class UserControllers{
     try{
       const id = req.params.id;
       const user = req.body;
-      const updateUser = await userModels.putUser(user, id);
+      const updateUser = await UserService.putUser(id, user);
       if(!updateUser) {
         return res.status(404).json({message: "User not found!"});
       }
-      res.redirect('/');
+      res.status(200).json({message : "Put user successfully! ", user : updateUser});
     }
     catch(error){
       res.status(500).json({ message : "Internal Server Error"});
@@ -79,12 +57,13 @@ class UserControllers{
   static deleteUser = async (req, res) => {
     try{
       const id = req.params.id;
-      const deleteUser = await userModels.deleteUser(id);
+      console.log(id);
+      const deleteUser = await UserService.deleteUser(id);
 
       if(!deleteUser){
         return res.status(404).json({ message :" User not found !"});
       }
-      res.redirect('/');
+      res.status(200).json({message: "User has been defeat"})
     }
     catch(error){
       res.status(500).json({ message : "Internal Server Error"});

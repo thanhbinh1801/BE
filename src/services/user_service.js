@@ -1,57 +1,28 @@
-import writeFileSync from "../utils/WriteFileSync.js";
-import dbjson from '../db/db.json' with {type: "json"};
+import UserModels from "../models/user_models.js";
 
-//code theo class
-
-const getAllUser = async () => {
-  return dbjson.users;
-}
-
-const getUserbyID = async (id) => {
-  const data = dbjson.users.find(user => user.id == parseInt(id) );
-  if (!data) {
-    return null;
+class UserService {
+  static getAllUser = async () => {
+    const user = await UserModels.find();
+    return user;
   }
-  return data;
+  static getUserById = async (id) => {
+    const user = await UserModels.findById(id);
+    return user;
+  }
+  static addUser = async (user) => {
+    const newUser = new UserModels(user);
+    const saveUser = await newUser.save();
+    return saveUser;
+  }
+  static putUser = async (id, user) => {
+    const putUser = await UserModels.findByIdAndUpdate(id, user);
+    return putUser;
+  }
+  static deleteUser = async (id) =>{
+   const user = await UserModels.findByIdAndDelete(id);
+   console.log(user);
+   return user; 
+  }
 }
 
-const addUser = async (user) => {
-  const newUser = {
-    id: dbjson.users.reduce((max, item) => item.id > max ? item.id : max, dbjson.users[0].id) + 1,
-    ...user
-  }
-  dbjson.users.push(newUser);
-  writeFileSync(dbjson);
-  return newUser;
-}
-
-const putUser = async (user, id) => {
-  const user_index = dbjson.users.findIndex( user => user.id === parseInt(id));
-  if(user_index == -1) {
-    return null;
-  }
-  dbjson.users[user_index] = {
-    id: dbjson.users.reduce((max, item) => item.id > max ? item.id : max, dbjson.users[0].id) + 1,
-    ...user
-  }
-  writeFileSync(dbjson);
-  return dbjson.users[user_index];
-}
-
-const deleteUser = async (id) => {
-  const user_index = dbjson.users.findIndex( user => user.id === parseInt(id));
-  if(user_index == -1) {
-    return null;
-  }
-  const deleteUser = dbjson.users.splice(user_index, 1);
-  writeFileSync(dbjson);
-  return deleteUser;
-}
-
-export default  {
-  getAllUser,
-  getUserbyID,
-  addUser,
-  putUser,
-  deleteUser
-}
+export default UserService;

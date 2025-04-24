@@ -1,26 +1,19 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import user_router from './routes/user_router.js';
-import methodOverride from 'method-override';
+import instanceDatabase from './models/singleton_pattern.js';
+
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+instanceDatabase;
 const app = express();
 const PORT = process.env.PORT;
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views')); 
-app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', user_router);
+app.use('/mongoose/v1/users', user_router);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

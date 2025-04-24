@@ -5,8 +5,7 @@ import userControllers from "../controllers/user_controllers.js";
 const router = Router();
 
 router.get('/', userControllers.getAllUser);
-router.get('/add', userControllers.showAddForm);
-router.get('/edit/:id', userControllers.showEditForm);
+router.get('/:id', userControllers.getUserByID);
 router.post('/add', userValidate, userControllers.addUser);
 router.put('/edit/:id', userValidate, userControllers.putUser);
 router.delete('/delete/:id', userControllers.deleteUser);
