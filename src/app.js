@@ -8,6 +8,7 @@ import path from 'path';
 import cloudinary from 'cloudinary';
 const { uploader } = cloudinary.v2;
 import cookieParser from 'cookie-parser';
+import { errorHandler } from './handler/error-handler.js';
 
 dotenv.config();
 
@@ -27,6 +28,12 @@ app.use(cookieParser());
 
 app.use('/api/v1/auth', auth_router);
 app.use('/api/v1/user', user_router);
+
+app.use(errorHandler);
+
+app.use('*', (req, res) =>{
+  res.status(404).json({error: "Resource not found"});
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

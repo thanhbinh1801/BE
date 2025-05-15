@@ -6,15 +6,14 @@ class AuthenticateToken{
   
   static AuthRefreshToken(req, res, next){
     try{
-      const refreshToken = req.cookies.refreshToken;
-      if(!refreshToken){
-        return res.status(401).json({ msg: "No refresh token provided"});
-      }
-      jwt.verify(refreshToken, secret_key, (err, decode) => {
-        if(err) return res.status(403).json({msg: "verify error"});
-        req.user = decode;
-        next();
-      })
+      const authHeader = req.headers['authorization'];
+      const token = authHeader && authHeader.split(' ')[1];
+      
+      if (!token) return res.sendStatus(401);
+
+      const payload = jwt.verify(token, secret_key);
+      req.user = payload;
+      next()
     }
     catch(err){
       if(err.name == 'TokenExpiredError'){
